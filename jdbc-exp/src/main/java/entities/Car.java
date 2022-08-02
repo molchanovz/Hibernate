@@ -10,6 +10,7 @@ public class Car {
     private Integer id;
     private String model;
     private String color;
+    private String number;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "owner_id")
@@ -18,9 +19,18 @@ public class Car {
     public Car() {
     }
 
-    public Car(String model, String color) {
+    public Car(String model, String color, String number) {
         this.model = model;
         this.color = color;
+        this.number=number;
+    }
+
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
     }
 
     public Integer getId() {

@@ -23,10 +23,22 @@ public class Main {
         SessionFactory sessionFactory = meta.getSessionFactoryBuilder().build();
         Session session = sessionFactory.openSession();
 
-        List<Owner> list = getAllOwner(session);
-        list.stream().forEach(System.out::println);
+        Owner owner = findOwner(session, "а001уе777");
+        System.out.println(owner.getName());
 
         sessionFactory.close();
+    }
+
+    private static Car findCar(Session session, String number) {
+        String hql = "from " + Car.class.getSimpleName() + " where number = '" + number + "'";
+        Car car = (Car) session.createQuery(hql).getSingleResult();
+        return car;
+    }
+
+    private static Owner findOwner(Session session, String number) {
+        String hql = "from " + Car.class.getSimpleName() + " where number = '" + number + "'";
+        Car car = (Car) session.createQuery(hql).getSingleResult();
+        return car.getOwner();
     }
 
     private static Owner getOwner(Session session, String name) {
